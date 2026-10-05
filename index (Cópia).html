@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minha Agenda Acadêmica</title>
+
+    <style>
+
+        :root {
+            --primary: #333399;
+            --primary-dark: #25256f;
+
+            --background: #f3f5fb;
+            --card: #ffffff;
+
+            --text: #20233a;
+            --muted: #747b96;
+
+            --border: #e5e8f2;
+
+            --experimentos: #e9e8ff;
+            --experimentos-text: #38328d;
+
+            --arquitetura: #e1f4ec;
+            --arquitetura-text: #16734e;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: var(--background);
+            color: var(--text);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1400px, 94%);
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           CABEÇALHO
+        ========================================= */
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #333399,
+                #5555b9
+            );
+
+            color: white;
+
+            padding: 45px 0;
+        }
+
+        .header-content {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 25px;
+        }
+
+        .header h1 {
+            font-size: clamp(26px, 4vw, 40px);
+
+            margin: 0 0 10px;
+
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            margin: 0;
+
+            color: #e3e3ff;
+
+            font-size: 16px;
+        }
+
+        .header-icon {
+            font-size: 64px;
+
+            opacity: 0.9;
+        }
+
+
+        /* =========================================
+           CONTEÚDO PRINCIPAL
+        ========================================= */
+
+        main {
+            padding: 0 0 50px;
+        }
+
+
+        /* =========================================
+           SEÇÕES
+        ========================================= */
+
+        .section {
+            margin-top: 35px;
+            margin-bottom: 45px;
+        }
+
+        .section-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 0 0 20px;
+
+            font-size: 25px;
+
+            color: #20233a;
+
+            font-weight: 700;
+        }
+
+        .section-title span {
+            font-size: 28px;
+
+            line-height: 1;
+        }
+
+
+        /* =========================================
+           CARDS DAS REUNIÕES
+        ========================================= */
+
+        .meetings {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .meeting-card {
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(35, 40, 90, 0.06);
+
+            display: flex;
+
+            flex-direction: column;
+
+            min-height: 220px;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .meeting-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(35, 40, 90, 0.12);
+        }
+
+        .meeting-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+        }
+
+        .meeting-icon {
+            width: 52px;
+            height: 52px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 14px;
+
+            background: #eeedff;
+
+            color: var(--primary);
+
+            font-size: 26px;
+        }
+
+        .meeting-badge {
+            font-size: 12px;
+
+            font-weight: 700;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            background: #f0f0fa;
+
+            color: var(--primary);
+        }
+
+        .meeting-card h3 {
+            margin: 0 0 10px;
+
+            font-size: 19px;
+
+            line-height: 1.4;
+        }
+
+        .meeting-card p {
+            color: var(--muted);
+
+            margin: 0 0 22px;
+
+            font-size: 14px;
+        }
+
+        .meeting-button {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-top: auto;
+
+            padding: 13px 16px;
+
+            border-radius: 10px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            transition:
+                background 0.2s;
+        }
+
+        .meeting-button:hover {
+            background: var(--primary-dark);
+        }
+
+        .meeting-button .arrow {
+            font-size: 18px;
+        }
+
+
+        /* =========================================
+           QUADRO DE HORÁRIOS
+        ========================================= */
+
+        .schedule-section {
+            margin-top: 35px;
+        }
+
+        .schedule-header {
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+        }
+
+        .schedule-header p {
+            color: var(--muted);
+
+            margin: 6px 0 0;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           LEGENDA
+        ========================================= */
+
+        .legend {
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            font-size: 13px;
+
+            color: var(--muted);
+        }
+
+        .legend-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+        .legend-color {
+            width: 13px;
+            height: 13px;
+
+            border-radius: 4px;
+        }
+
+        .legend-experimentos {
+            background: var(--experimentos);
+
+            border: 1px solid #bdb8ff;
+        }
+
+        .legend-arquitetura {
+            background: var(--arquitetura);
+
+            border: 1px solid #a4ddc2;
+        }
+
+
+        /* =========================================
+           TABELA
+        ========================================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(35, 40, 90, 0.05);
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 900px;
+
+            border-collapse: collapse;
+
+            table-layout: fixed;
+        }
+
+        caption {
+            caption-side: top;
+
+            padding: 22px;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            text-align: left;
+
+            color: var(--text);
+        }
+
+        th,
+        td {
+            border-bottom:
+                1px solid var(--border);
+
+            border-right:
+                1px solid var(--border);
+
+            padding: 12px 8px;
+
+            text-align: center;
+
+            vertical-align: middle;
+
+            font-size: 13px;
+
+            height: 62px;
+        }
+
+        th:last-child,
+        td:last-child {
+            border-right: none;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        thead th {
+            background: #f7f7fc;
+
+            color: #555b77;
+
+            font-weight: 700;
+
+            height: 55px;
+        }
+
+        thead th:first-child {
+            color: var(--primary);
+
+            width: 125px;
+        }
+
+        tbody td:first-child {
+            background: #fafaff;
+
+            color: #656b85;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        tbody tr:hover td {
+            background-color: #fcfcff;
+        }
+
+        tbody tr:hover td:first-child {
+            background: #f4f3ff;
+        }
+
+
+        /* =========================================
+           CÉLULAS DAS DISCIPLINAS
+        ========================================= */
+
+        .class-cell {
+            font-weight: 600;
+
+            line-height: 1.4;
+
+            border-radius: 8px;
+
+            padding: 9px 5px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            gap: 3px;
+
+            min-height: 45px;
+        }
+
+        .class-cell small {
+            font-size: 11px;
+
+            font-weight: 500;
+        }
+
+        .experimentos {
+            background: var(--experimentos);
+
+            color: var(--experimentos-text);
+        }
+
+        .arquitetura {
+            background: var(--arquitetura);
+
+            color: var(--arquitetura-text);
+        }
+
+        .empty {
+            color: #d9dce7;
+        }
+
+
+        /* =========================================
+           RODAPÉ
+        ========================================= */
+
+        .footer {
+            text-align: center;
+
+            color: var(--muted);
+
+            padding: 25px 0;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           RESPONSIVIDADE
+        ========================================= */
+
+        @media (max-width: 950px) {
+
+            .meetings {
+                grid-template-columns: 1fr;
+            }
+
+            .meeting-card {
+                min-height: auto;
+            }
+
+            .header-content {
+                align-items: flex-start;
+            }
+
+            .schedule-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 32px 0;
+            }
+
+            .header-icon {
+                font-size: 42px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .section-title span {
+                font-size: 25px;
+            }
+
+            .meeting-card {
+                padding: 20px;
+            }
+
+            .section {
+                margin-top: 30px;
+
+                margin-bottom: 35px;
+            }
+
+            .schedule-section {
+                margin-top: 25px;
+            }
+
+            .table-wrapper {
+                border-radius: 12px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         CABEÇALHO
+    ========================================== -->
+
+    <header class="header">
+
+        <div class="container header-content">
+
+            <div>
+
+                <h1>
+                    Minha Agenda Acadêmica
+                </h1>
+
+                <p>
+                    Reuniões, disciplinas e compromissos da semana
+                </p>
+
+            </div>
+
+            <div
+                class="header-icon"
+                aria-hidden="true"
+            >
+                📚
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTEÚDO
+    ========================================== -->
+
+    <main class="container">
+
+
+        <!-- =====================================
+             REUNIÕES
+        ====================================== -->
+
+        <section
+            class="section"
+            aria-labelledby="meetings-title"
+        >
+
+            <h2
+                class="section-title"
+                id="meetings-title"
+            >
+
+                <span aria-hidden="true">
+                    🎥
+                </span>
+
+                Acesso às reuniões
+
+            </h2>
+
+
+            <div class="meetings">
+
+
+                <!-- Projeto de Experimentos -->
+
+                <article class="meeting-card">
+
+                    <div class="meeting-top">
+
+                        <div
+                            class="meeting-icon"
+                            aria-hidden="true"
+                        >
+                            🧪
+                        </div>
+
+                        <span class="meeting-badge">
+                            Disciplina
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Projeto de Experimentos
+                    </h3>
+
+                    <p>
+                        Encontro com Ricardo • Google Meet
+                    </p>
+
+
+                    <a
+                        class="meeting-button"
+                        href="https://meet.google.com/msc-sviy-hox"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        Entrar na reunião
+
+                        <span
+                            class="arrow"
+                            aria-hidden="true"
+                        >
+                            ↗
+                        </span>
+
+                    </a>
+
+                </article>
+
+
+
+                <!-- Arquitetura de Computadores -->
+
+                <article class="meeting-card">
+
+                    <div class="meeting-top">
+
+                        <div
+                            class="meeting-icon"
+                            aria-hidden="true"
+                        >
+                            💻
+                        </div>
+
+                        <span class="meeting-badge">
+                            Disciplina
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Arquitetura de Computadores
+                    </h3>
+
+                    <p>
+                        Encontro com Renan • Google Meet
+                    </p>
+
+
+                    <a
+                        class="meeting-button"
+                        href="https://meet.google.com/hud-jixb-yfh"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        Entrar na reunião
+
+                        <span
+                            class="arrow"
+                            aria-hidden="true"
+                        >
+                            ↗
+                        </span>
+
+                    </a>
+
+                </article>
+
+
+
+                <!-- Reunião LSCAD -->
+
+                <article class="meeting-card">
+
+                    <div class="meeting-top">
+
+                        <div
+                            class="meeting-icon"
+                            aria-hidden="true"
+                        >
+                            👥
+                        </div>
+
+                        <span class="meeting-badge">
+                            Grupo LSCAD
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Reunião LSCAD
+                    </h3>
+
+                    <p>
+                        Encontro do grupo de pesquisa • Google Meet
+                    </p>
+
+
+                    <a
+                        class="meeting-button"
+                        href="https://meet.google.com/msc-sviy-hox?pli=1&authuser=1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        Entrar na reunião
+
+                        <span
+                            class="arrow"
+                            aria-hidden="true"
+                        >
+                            ↗
+                        </span>
+
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             QUADRO DE HORÁRIOS
+        ====================================== -->
+
+        <section
+            class="schedule-section"
+            aria-labelledby="schedule-title"
+        >
+
+
+            <div class="schedule-header">
+
+                <div>
+
+                    <h2
+                        class="section-title"
+                        id="schedule-title"
+                    >
+
+                        <span aria-hidden="true">
+                            🗓️
+                        </span>
+
+                        Quadro de Horários
+
+                    </h2>
+
+                    <p>
+                        Programação semanal das disciplinas e encontros.
+                    </p>
+
+                </div>
+
+
+                <!-- Legenda -->
+
+                <div
+                    class="legend"
+                    aria-label="Legenda das disciplinas"
+                >
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-color legend-experimentos"
+                        ></span>
+
+                        Projeto de Experimentos
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-color legend-arquitetura"
+                        ></span>
+
+                        Arquitetura de Computadores
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Tabela -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <caption>
+                        Agenda semanal
+                    </caption>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th scope="col">
+                                Horários
+                            </th>
+
+                            <th scope="col">
+                                Segunda
+                            </th>
+
+                            <th scope="col">
+                                Terça
+                            </th>
+
+                            <th scope="col">
+                                Quarta
+                            </th>
+
+                            <th scope="col">
+                                Quinta
+                            </th>
+
+                            <th scope="col">
+                                Sexta
+                            </th>
+
+                            <th scope="col">
+                                Sábado
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <!-- 07:00 -->
+
+                        <tr>
+
+                            <td>
+                                07:00 - 08:00
+                            </td>
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 08:00 -->
+
+                        <tr>
+
+                            <td>
+                                08:00 - 09:00
+                            </td>
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 09:25 -->
+
+                        <tr>
+
+                            <td>
+                                09:25 - 10:00
+                            </td>
+
+
+                            <td>
+
+                                <div
+                                    class="class-cell experimentos"
+                                >
+
+                                    Ricardo
+
+                                    <small>
+                                        Projeto de Experimentos
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <td class="empty">—</td>
+
+
+                            <td>
+
+                                <div
+                                    class="class-cell experimentos"
+                                >
+
+                                    Ricardo
+
+                                    <small>
+                                        Projeto de Experimentos
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <td class="empty">—</td>
+
+                            <td class="empty">—</td>
+
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 10:00 -->
+
+                        <tr>
+
+                            <td>
+                                10:00 - 11:00
+                            </td>
+
+
+                            <td>
+
+                                <div
+                                    class="class-cell experimentos"
+                                >
+
+                                    Ricardo
+
+                                    <small>
+                                        Projeto de Experimentos
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <td class="empty">—</td>
+
+
+                            <td>
+
+                                <div
+                                    class="class-cell experimentos"
+                                >
+
+                                    Ricardo
+
+                                    <small>
+                                        Projeto de Experimentos
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <td class="empty">—</td>
+
+                            <td class="empty">—</td>
+
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 11:00 -->
+
+                        <tr>
+
+                            <td>
+                                11:00 - 12:00
+                            </td>
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 12:00 -->
+
+                        <tr>
+
+                            <td>
+                                12:00 - 13:00
+                            </td>
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 13:00 -->
+
+                        <tr>
+
+                            <td>
+                                13:00 - 14:00
+                            </td>
+
+                            <td class="empty">—</td>
+
+
+                            <td>
+
+                                <div
+                                    class="class-cell arquitetura"
+                                >
+
+                                    Renan
+
+                                    <small>
+                                        Arquitetura de Computadores
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 14:00 -->
+
+                        <tr>
+
+                            <td>
+                                14:00 - 15:00
+                            </td>
+
+                            <td class="empty">—</td>
+
+
+                            <td>
+
+                                <div
+                                    class="class-cell arquitetura"
+                                >
+
+                                    Renan
+
+                                    <small>
+                                        Arquitetura de Computadores
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 15:00 -->
+
+                        <tr>
+
+                            <td>
+                                15:00 - 16:00
+                            </td>
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+
+                            <td>
+
+                                <div
+                                    class="class-cell arquitetura"
+                                >
+
+                                    Renan
+
+                                    <small>
+                                        Arquitetura de Computadores
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 16:00 -->
+
+                        <tr>
+
+                            <td>
+                                16:00 - 17:00
+                            </td>
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+
+                            <td>
+
+                                <div
+                                    class="class-cell arquitetura"
+                                >
+
+                                    Renan
+
+                                    <small>
+                                        Arquitetura de Computadores
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+
+                        <!-- 17:00 -->
+
+                        <tr>
+
+                            <td>
+                                17:00 - 18:00
+                            </td>
+
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+                            <td class="empty">—</td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         RODAPÉ
+    ========================================== -->
+
+    <footer class="footer">
+
+        Minha Agenda Acadêmica
+
+        • Links e horários de estudo
+
+    </footer>
+
+
+</body>
+
+</html>
