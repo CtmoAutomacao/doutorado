@@ -15,11 +15,18 @@
             --muted: #747b96;
             --border: #e5e8f2;
 
+            /* Laranja forte com texto branco para melhor contraste */
+            --estudos: #ff550f;
+            --estudos-text: #ffffff;
+
             --experimentos: #e9e8ff;
             --experimentos-text: #38328d;
 
             --arquitetura: #e1f4ec;
             --arquitetura-text: #16734e;
+
+            --reuniao: #fff3cd;
+            --reuniao-text: #8a5a00;
 
             --prova: #ffe9e9;
             --prova-text: #a33a3a;
@@ -226,6 +233,11 @@
             border-radius: 4px;
         }
 
+        .legend-estudos {
+            background: var(--estudos);
+            border: 1px solid #d1460c;
+        }
+
         .legend-experimentos {
             background: var(--experimentos);
             border: 1px solid #bdb8ff;
@@ -234,6 +246,11 @@
         .legend-arquitetura {
             background: var(--arquitetura);
             border: 1px solid #a4ddc2;
+        }
+
+        .legend-reuniao {
+            background: var(--reuniao);
+            border: 1px solid #e0c46a;
         }
 
         .table-wrapper {
@@ -264,7 +281,7 @@
         td {
             border-bottom: 1px solid var(--border);
             border-right: 1px solid var(--border);
-            padding: 12px 8px;
+            padding: 6px 4px;
             text-align: center;
             vertical-align: middle;
             font-size: 13px;
@@ -299,7 +316,8 @@
             white-space: nowrap;
         }
 
-        tbody tr:hover td {
+        /* Hover só nas células vazias e na coluna de horário */
+        tbody tr:hover td.empty {
             background-color: #fcfcff;
         }
 
@@ -314,14 +332,23 @@
             padding: 9px 5px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             justify-content: center;
+            text-align: center;
             gap: 3px;
             min-height: 45px;
+            width: 100%;
+            height: 100%;
         }
 
         .class-cell small {
             font-size: 11px;
             font-weight: 500;
+        }
+
+        .estudos {
+            background: var(--estudos);
+            color: var(--estudos-text);
         }
 
         .experimentos {
@@ -332,6 +359,11 @@
         .arquitetura {
             background: var(--arquitetura);
             color: var(--arquitetura-text);
+        }
+
+        .reuniao {
+            background: var(--reuniao);
+            color: var(--reuniao-text);
         }
 
         .empty {
@@ -715,6 +747,11 @@
                 <div class="legend" aria-label="Legenda das disciplinas">
 
                     <div class="legend-item">
+                        <span class="legend-color legend-estudos"></span>
+                        Estudar
+                    </div>
+
+                    <div class="legend-item">
                         <span class="legend-color legend-experimentos"></span>
                         Projeto de Experimentos
                     </div>
@@ -722,6 +759,11 @@
                     <div class="legend-item">
                         <span class="legend-color legend-arquitetura"></span>
                         Arquitetura de Computadores
+                    </div>
+
+                    <div class="legend-item">
+                        <span class="legend-color legend-reuniao"></span>
+                        Reunião
                     </div>
 
                 </div>
@@ -759,9 +801,23 @@
                         <tr>
                             <td>08:00 - 09:00</td>
                             <td class="empty">—</td>
+
+                            <td>
+                                <div class="class-cell estudos">
+                                    ESTUDAR
+                                    <small>Projeto de Experimentos</small>
+                                </div>
+                            </td>
+
                             <td class="empty">—</td>
-                            <td class="empty">—</td>
-                            <td class="empty">—</td>
+
+                            <td>
+                                <div class="class-cell estudos">
+                                    ESTUDAR
+                                    <small>Projeto de Experimentos</small>
+                                </div>
+                            </td>
+
                             <td class="empty">—</td>
                             <td class="empty">—</td>
                         </tr>
@@ -853,7 +909,13 @@
 
                         <tr>
                             <td>14:00 - 15:00</td>
-                            <td class="empty">—</td>
+
+                            <td>
+                                <div class="class-cell estudos">
+                                    ESTUDAR
+                                    <small>Projeto de Experimentos</small>
+                                </div>
+                            </td>
 
                             <td>
                                 <div class="class-cell arquitetura">
@@ -862,16 +924,37 @@
                                 </div>
                             </td>
 
+                            <td>
+                                <div class="class-cell estudos">
+                                    ESTUDAR
+                                    <small>Projeto de Experimentos</small>
+                                </div>
+                            </td>
+
                             <td class="empty">—</td>
-                            <td class="empty">—</td>
-                            <td class="empty">—</td>
+
+                            <td>
+                                <div class="class-cell estudos">
+                                    ESTUDAR
+                                    <small>Projeto de Experimentos</small>
+                                </div>
+                            </td>
+
                             <td class="empty">—</td>
                         </tr>
 
                         <tr>
                             <td>15:00 - 16:00</td>
+
                             <td class="empty">—</td>
-                            <td class="empty">—</td>
+
+                            <td>
+                                <div class="class-cell reuniao">
+                                    REUNIÃO
+                                    <small>Grupo LSCAD</small>
+                                </div>
+                            </td>
+
                             <td class="empty">—</td>
 
                             <td>
